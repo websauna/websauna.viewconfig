@@ -1,40 +1,87 @@
 from pyramid.view import view_config
 from websauna.viewconfig import view_overrides
+from pyramid.httpexceptions import HTTPOk
+
+class ParentResource:
+    id = "parent"
 
 
-class ParentContext:
-    pass
+class ChildResource(ParentResource):
+    id = "child"
 
 
-class ChildContext(ParentContext):
-    pass
+class ChildResource2(ParentResource):
+    id = "child2"
 
 
-class Parent:
+class GrandChildResource(ChildResource):
+    id = "grand_child"
 
-    @view_config(name="edit", context=ParentContext, renderer="foobar.html")
+
+class ParentView:
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    @view_config(name="edit", context=ParentResource)
     def traversing_test(self):
+        return HTTPOk("Editing: {}".format(self.context.id))
+
+
+
+@view_overrides(context=ChildResource)
+class ChildView(ParentView):
+    pass
+
+
+
+@view_overrides(context=GrandChildResource)
+class GrandChildView(ParentView):
+    pass
+
+
+
+@view_overrides(context=ChildResource2)
+class ChildViewWithOtherViewConfigs(ParentView):
+
+    @view_config(name="show", context=ChildResource2)
+    def traversing_test(self):
+        return HTTPOk("Showing: {}".format(self.context.id))
+
+
+
+
+class Root:
+    """Traversing root."""
+
+    def __init__(self, request):
         pass
 
+    def __getitem__(self, name):
+        if name == "parent":
+            return ParentResource()
+        elif name == "child":
+            return ChildResource()
+        elif name == "child2":
+            return ChildResource2()
+        elif name == "grand_child":
+            return GrandChildResource()
 
 
-@view_overrides(context=ChildContext)
-class ChildWithRoute(Parent):
+
+
+class ParentRouteView:
+
+    def __init__(self, request):
+        pass
+
+    @view_config(route_name="parent_hello", renderer="parent.html")
+    def traversing_test(self):
+        return {"class": self.__class__.__name__}
+
+
+
+@view_overrides(route_name="child_hello", renderer="child.html")
+class ChildRouteView(ParentRouteView):
     pass
-
-
-# @view_overrides(context=ChildContext)
-# class ChildWithContext(Parent):
-#     pass
-#
-#
-# @view_overrides(context=ChildContext)
-# class ChildWithContextAndViewConfigMix(Parent):
-#
-#     @view_config(name="edit", context=ChildContext, renderer="foobar.html")
-#     def another_func(self):
-#         pass
-#
-#     @view_config(route_name="parent", renderer="foobar.html")
-#     def yet_another_func(self):
-#         pass
