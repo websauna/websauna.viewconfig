@@ -6,6 +6,5 @@ __pycache__
 *.egg
 *.egg-info
 *.log
-
-# Created by pytest-splinter for screenshots if not disabled by default
-websauna.urlshortener.tests.*
+coverage.xml
+.coverage

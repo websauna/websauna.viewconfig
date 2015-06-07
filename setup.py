@@ -17,6 +17,7 @@ here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
+
 setup(
     name='websauna.viewconfig',
 
@@ -25,15 +26,15 @@ setup(
     # https://packaging.python.org/en/latest/single_source_version.html
     version='0.1',
 
-    description='View configuration helpers for Pyramid framework',
+    description='View override configuration pattern for Pyramid framework',
     long_description=long_description,
 
     # The project's main homepage.
-    url='https://github.com/',
+    url='https://bitbucket.org/websauna/websauna.viewconfig',
 
     # Author details
-    author='The Python Packaging Authority',
-    author_email='pypa-dev@googlegroups.com',
+    author='Mikko Ohtamaa',
+    author_email='mikko@opensourcehacker.com',
 
     # Choose your license
     license='MIT',
@@ -76,8 +77,7 @@ setup(
     # $ pip install -e .[dev,test]
     extras_require={
         'dev': ['check-manifest'],
-        'test': ['codecov', 'pytest', 'pyramid_jinja2', 'paste', "pytest-splinter", "webtest", "pytest-cov"],
-        'uwsgi': ['uwsgi', 'PasteDeploy', 'ws4py']
+        'test': ['codecov', 'pytest', 'pyramid_jinja2', 'paste', "webtest", "pytest-cov"],
     },
 
     # To provide executable scripts, use entry points in preference to the
