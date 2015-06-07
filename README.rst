@@ -36,13 +36,13 @@ websauna.viewconfig
 Features
 --------
 
-``websauna.viewconfig`` provides a class decorator ``@view_overrides`` which allows subclasses to override parts of the parent view classes view configuration. The primary use case is to have general class based views which you can then subclass for more specific use cases. The patter is very powerful when combined with Pyramid's travesing contexts.
+``websauna.viewconfig`` provides a class decorator ``@view_overrides`` which allows subclasses to partially override parent class view configuration. The primary use case is to have generic class views which you can subclass for more specific use cases. The pattern is very powerful when combined with Pyramid's travesing contexts.
 
 Example:
 
-* There is a generic edit view for all of your models called "GenericEdit"
+* There is a generic edit view for all of your models called *GenericEdit*
 
-* But for a specific model, let's say Car, you want to override parts of GenericEdit e.g. to include a widget to handle car colour selection. Other models, like House and Person, still use GenericEdit.
+* But for a specific model, let's say Car, you want to override parts of *GenericEdit* e.g. to include a widget to handle car colour selection. Other models, like House and Person, still use *GenericEdit*.
 
 The code would be::
 
@@ -87,7 +87,7 @@ The code would be::
                pass
 
           def __getitem__(self, name):
-               if is_car(name):
+              if is_car(name):
                     return Car(name)
                else:
                     return House(name):
@@ -102,16 +102,26 @@ Now one could traverse edit views like::
 
 The ``@view_overrides`` pattern can be also used with routing based views to override e.g ``route_name`` and ``renderer`` (the template of subclass view). For those examples, please see testing source code.
 
+The implementation is based on `venusian.lift() <http://venusian.readthedocs.org/en/latest/api.html#venusian.lift>`_ function with the overriding bits added in.
+
 Development and tests
-------------------g--
+---------------------
 
 To run tests::
 
-     py.test websauna/viewconfig
+    pip install -e ".[test]"
+    py.test websauna/viewconfig
 
 To run coverage::
 
      py.test --cov websauna.viewconfig --cov-report xml
+
+All the testing on drone.io::
+
+    pip install -U pytest
+    pip install -e ".[test]"
+    py.test --cov websauna.viewconfig --cov-report xml
+    codecov --token="xxx"
 
 Author
 ------

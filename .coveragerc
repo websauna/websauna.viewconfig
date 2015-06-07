@@ -14,3 +14,5 @@ exclude_lines =
 ignore_errors = True
 omit =
     setup.py
+    websauna/viewconfig/tests/brokentestmodule.py
+    websauna/viewconfig/tests/testmodule.py
