@@ -87,7 +87,6 @@ class view_overrides(object):
                     for cb, _, liftid, cscope in category:
                         append = True
                         toappend = (cb, module_name, liftid, cscope)
-                        print("Toappend", toappend)
 
                         if cscope == 'class':
                             for ncb, _, nliftid, nscope in callbacks:
