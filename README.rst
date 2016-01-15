@@ -48,6 +48,7 @@ The code would be::
 
      from websauna.viewconfig import view_overrides
 
+     # We define some model structure for which we are going to create edit views
      class BaseModel:
           pass
 
@@ -60,6 +61,7 @@ The code would be::
           pass
 
 
+     # This is the base edit view class. You can use it as is or subclass it to override parts of it.
      class GenericEdit:
 
          widgets = ["name", "price"]
@@ -75,11 +77,14 @@ The code would be::
              pass
 
 
+     # This overrides edit() method from GenericEdit.edit() with a different @view_config(context) parameters. 
+     # Otherwise @view_config() parameters are copied as is.
      @view_overrides(context=Car)
      class CarEdit(GenericEdit):
          widgets = ["name", "price", "color", "year]
 
 
+      # Some dummy traversing which shows how view are mapped to traversing context
       class Root:
           """Pyramid's traversing root."""
 
