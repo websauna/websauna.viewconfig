@@ -17,14 +17,19 @@ here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
+long_description += "\n\n"
+
+with open(path.join(here, 'CHANGES.rst'), encoding='utf-8') as f:
+    long_description = f.read()
+
 
 setup(
     name='websauna.viewconfig',
-
+    namespace_packages=["websauna"],
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='0.1',
+    version='0.1.1',
 
     description='View override configuration pattern for Pyramid framework',
     long_description=long_description,
