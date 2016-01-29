@@ -63,10 +63,11 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
     ],
 
     # What does your project relate to?
-    keywords='pyramid view_config',
+    keywords='pyramid',
 
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().

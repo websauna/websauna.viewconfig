@@ -20,8 +20,8 @@ def _create_child_view_config_from_parent_cb(cb, module_name, liftid, cscope, ov
     # (<function view_config.__call__.<locals>.callback at 0x101d7d268>, 'websauna.viewconfig.tests.testmodule', 'render None', 'class')
 
 
-    # Check if we are view_config
-    if not cb.__qualname__.startswith("view_config"):
+    # Check if we are view_config or previously nested @view_overrides
+    if not (cb.__qualname__.startswith("view_config") or cb.__qualname__.startswith("_create_child_view_config_from_parent_cb")):
         return (cb, module_name, liftid, cscope), False
 
     # OK we are view_config, then pry the decorators parameters out from the closure. If this is not evil Python programming, I don't know what is.
@@ -72,9 +72,11 @@ class view_overrides(object):
         found = False
 
         for cls in getmro(wrapped):
+
             attached_categories = cls.__dict__.get(ATTACH_ATTR, None)
             if attached_categories is None:
                 attached_categories = cls.__dict__.get(LIFTONLY_ATTR, None)
+
             if attached_categories is not None:
 
                 for cname, category in attached_categories.items():

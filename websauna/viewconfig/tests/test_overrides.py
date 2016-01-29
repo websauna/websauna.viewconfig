@@ -49,6 +49,15 @@ def test_grand_child_view():
     assert resp.text == '200 OK\n\n\n\n\nEditing: grand_child\n\n'
 
 
+def test_grand_grand_child_view():
+    """view_overrides work correctly on the third level of inheritance with two nested @view_overrides."""
+    wsgi = setup_wsgi()
+
+    resp = wsgi.get("/grand_grand_child/edit", status=200)
+    assert resp.text == '200 OK\n\n\n\n\nEditing: grand_grand_child\n\n'
+
+
+
 def test_invalid_override():
     """Trying to override non-view class causes an error.."""
     configurator = Configurator()

@@ -18,6 +18,10 @@ class GrandChildResource(ChildResource):
     id = "grand_child"
 
 
+class GrandGrandChildResource(GrandChildResource):
+    id = "grand_grand_child"
+
+
 class ParentView:
 
     def __init__(self, context, request):
@@ -40,6 +44,10 @@ class ChildView(ParentView):
 class GrandChildView(ParentView):
     pass
 
+
+@view_overrides(context=GrandGrandChildResource)
+class GrandChildView(GrandChildView):
+    pass
 
 
 @view_overrides(context=ChildResource2)
@@ -67,8 +75,8 @@ class Root:
             return ChildResource2()
         elif name == "grand_child":
             return GrandChildResource()
-
-
+        elif name == "grand_grand_child":
+            return GrandGrandChildResource()
 
 
 class ParentRouteView:

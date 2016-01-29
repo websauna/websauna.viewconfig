@@ -4,7 +4,7 @@ Changelog for websauna.viewconfig
 0.1.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fixed ``@view_overrides`` overriding a parent class with another ``@view_overrides``
 
 
 0.1.1 (unreleased)
