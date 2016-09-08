@@ -1,6 +1,12 @@
 Changelog for websauna.viewconfig
 =================================
 
+0.1.4 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
 0.1.3 (2016-09-09)
 ------------------
 
