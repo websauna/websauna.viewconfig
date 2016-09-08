@@ -33,6 +33,11 @@ websauna.viewconfig
 
 .. contents:: :local:
 
+NOTE
+----
+
+This has been now merged in `Websauna main repo <https://websauna.org>`_. We provide only backwards compatible imports.
+
 Features
 --------
 
