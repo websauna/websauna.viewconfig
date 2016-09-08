@@ -1,7 +1,7 @@
 Changelog for websauna.viewconfig
 =================================
 
-0.1.3 (unreleased)
+0.1.3 (2016-09-09)
 ------------------
 
 - Merged to `Websauna <https://websauna.org>`_
